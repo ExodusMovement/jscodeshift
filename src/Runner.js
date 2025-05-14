@@ -12,8 +12,6 @@ const child_process = require('child_process');
 const pc = require('picocolors');
 const fs = require('graceful-fs');
 const path = require('path');
-const http = require('http');
-const https = require('https');
 const ignores = require('./ignoreFiles');
 
 const tmp = require('tmp');
@@ -180,32 +178,7 @@ function run(transformFile, paths, options) {
   }
 
   if (/^http/.test(transformFile)) {
-    return new Promise((resolve, reject) => {
-      // call the correct `http` or `https` implementation
-      (transformFile.indexOf('https') !== 0 ?  http : https).get(transformFile, (res) => {
-        let contents = '';
-        res
-          .on('data', (d) => {
-            contents += d.toString();
-          })
-          .on('end', () => {
-            const ext = path.extname(transformFile);
-            tmp.file({ prefix: 'jscodeshift', postfix: ext }, (err, path, fd) => {
-              if (err) return reject(err);
-              fs.write(fd, contents, function (err) {
-                if (err) return reject(err);
-                fs.close(fd, function(err) {
-                  if (err) return reject(err);
-                  transform(path).then(resolve, reject);
-                });
-              });
-            });
-        })
-      })
-      .on('error', (e) => {
-        reject(e);
-      });
-    });
+    throw new Error('refusing to fetch transform')
   } else if (!fs.existsSync(transformFile)) {
     process.stderr.write(
       pc.bgRed(pc.white('ERROR')) + ' Transform file ' + transformFile + ' does not exist \n'
