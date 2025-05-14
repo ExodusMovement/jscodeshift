@@ -22,6 +22,8 @@
   ],
   "files": [
     "src/",
+    "utils/",
+    "parser/",
     "!**/__tests__",
     "!**/__testfixtures__"
   ],
