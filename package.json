@@ -20,6 +20,11 @@
     "recast",
     "babel"
   ],
+  "files": [
+    "src/",
+    "!**/__tests__",
+    "!**/__testfixtures__"
+  ],
   "author": "Felix Kling",
   "license": "MIT",
   "dependencies": {
