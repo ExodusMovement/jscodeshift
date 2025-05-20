@@ -1,6 +1,6 @@
 {
-  "name": "jscodeshift",
-  "version": "17.3.0",
+  "name": "@exodus/jscodeshift",
+  "version": "17.3.0-rc.0",
   "description": "A toolkit for JavaScript codemods",
   "repository": {
     "type": "git",
@@ -9,8 +9,6 @@
   "bugs": "https://github.com/facebook/jscodeshift/issues",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist/",
-    "prepare": "yarn clean && cp -R src/ dist/",
     "test": "jest --bail",
     "release": "changeset publish"
   },
@@ -21,6 +19,13 @@
     "codemod",
     "recast",
     "babel"
+  ],
+  "files": [
+    "src/",
+    "utils/",
+    "parser/",
+    "!**/__tests__",
+    "!**/__testfixtures__"
   ],
   "author": "Felix Kling",
   "license": "MIT",
